@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!--Main layout-->
+  <main>
+    <div class="m-0 h-800 d-flex justify-content-between bg-color">
+      <img class="home-img" src="../media/img_2.png" alt="" height="700px" />
+      <div class="container d-flex flex-column align-items-center">
+        <img class="" src="../media/logo1.png" alt=""  height="100px" style="margin-top:200px;" />
+        <div class=" text-white h3 text-center py-5 text-uppercase"><p class="center">STRIPE <p>CLOTHING<p> COLLECTION</p></div>
+      </div>
+      <div>
+        <img class="home-img" src="../media/img.png" alt="" height="700px" />
+      </div>
+    </div>
+    <div id="collection" class="container border my-4 p-4 border-dark rounded">
+      <h3 class="py-3">BRAND NEW EXCLUSIVE COLLECTION</h3>
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+
+        <!--Grid row-->
+        
+        <div class="row">
+
+          {% for item in object_list %}
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-3">
+
+            <!--Card-->
+            <div class="card border-dark" >
+
+              <!--Card image-->
+              <div class="view overlay">
+                <a href="{{ item.get_absolute_url }}">
+                  <img src="{{item.image}}" class="card-img-top" height="250px" width="450px" alt="">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+              <!--Card image-->
+
+              <!--Card content-->
+              <div class="card-body text-center">
+                <!--Category & Title-->
+                <a href="" class="text-secondary text-decoration-none">
+                  <h6>{{item.get_category_display}}</h6>
+                </a>
+                <h5>
+                  <strong>
+                    <a href="{{ item.get_absolute_url }}" class="text-dark text-decoration-none text-uppercase">{{ item.title }}
+                      {% comment %} <span class="badge {{ item.get_label_display }}-color">NEW</span> {% endcomment %}
+                    </a>
+                  </strong>
+                </h5>
+
+                <h4 class="font-weight-bold blue-text">
+                  <strong>${{item.price}}</strong>
+                </h4>
+
+              </div>
+              <!--Card content-->
+
+            </div>
+            <!--Card-->
+
+          </div>
+          <!--Grid column-->
+          {% endfor %}
+        </div>
+        
+      </section>
+      <!--Pagination-->
+
+      {% if is_paginated %}
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+          <!--Arrow left-->
+          {% if page_obj.has_previous %}
+            <li class="page-item ">
+              <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+          {%endif%}
+          <li class="page-item active">
+            <a class="page-link" href="?page={{page_obj.number}}">{{page_obj.number}}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+      <!--Pagination-->
+
+    </div>
+    
+  </main>
+
+{% endblock content %}

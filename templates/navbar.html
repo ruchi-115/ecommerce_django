@@ -1,0 +1,62 @@
+{% load cart_template_tags %}
+
+<!-- Navbar -->
+<nav class="navbar scrolled navbar-expand-lg navbar-dark fixed-top navbar-color" >
+      <!-- Brand -->
+      <a class="navbar-brand" href="/">
+        <img src="../media/logo_initial.png" alt=""  height="30px"/>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mt-2 mt-lg-0  mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link " href="/">HOME
+              <span class="sr-only">(current)</span>    
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#collection"
+              >COLLECTION</a>
+          </li>
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav  mr-sm-2">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item badge btn-outline-primary my-1 ">
+            <a href="{% url 'core:order-summary'%}" class="nav-link ">
+              <span class=" my-sm-0 z-depth-1 mr-1"> {{ request.user|cart_item_count }}</span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class=" d-none d-sm-inline-block"> CART </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">
+              <span class="d-none d-sm-inline-block"> LOGOUT </span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'account_signup' %}">
+              <span class="d-none d-sm-inline-block"> SIGNUP </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'account_login' %}">
+              <span class="d-none d-sm-inline-block"> LOGIN </span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
+  </nav>
+  <!-- Navbar -->
