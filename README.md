@@ -62,4 +62,6 @@ Now you can run the project with this command
 ```
 python manage.py runserver
 ```
+## Project Deployment
+Using pythonanywhere for django project deployment - https://help.pythonanywhere.com/pages/DeployExistingDjangoProject/
 
